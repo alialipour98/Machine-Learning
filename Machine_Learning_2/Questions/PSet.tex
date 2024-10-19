@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\newcommand{\proof}[1]{
+{\noindent {\it Proof.} {#1} \rule{2mm}{2mm} \vskip \belowdisplayskip}
+}
+
+
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{claim}[lemma]{Claim}
+\newtheorem{definition}[lemma]{Definition}
+\newtheorem{corollary}[lemma]{Corollary}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\topmargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8.5in}
+
+\begin{document}
+
+\setlength{\fboxrule}{.5mm}\setlength{\fboxsep}{1.2mm}
+\newlength{\boxlength}\setlength{\boxlength}{\textwidth}
+\addtolength{\boxlength}{-4mm}
+\begin{center}\framebox{\parbox{\boxlength}{\bf
+Machine Learning \hfill 
+}}\end{center}
+\vspace{5mm}
+
+\section*{Question 1}
+
+The goal of this question is to investigate underfitting and overfitting. 
+First, generate the following data using the given code:
+
+\begin{lstlisting}[language=Python]
+X = np.arange(-10,10,0.2)
+Y = 2*cos(x)/-pi + (2*x)/(2*pi)+2*cos(3*x)/(-3*pi)
+\end{lstlisting}
+
+Now, add white Gaussian noise to the data in the first case, and in the second case, 
+add Poisson noise with $\lambda = 2$. Try to fit a polynomial function of degree 1 to 15 
+to the data. Determine the best and worst degree. Plot the fitted curves and report the 
+MSE values for degrees 1, 3, 8, and 15. Describe your observations by specifying the bias 
+and variance values.
+
+\section*{Question 2}
+
+In this question, generate data for the two following cases. In both cases, we have two sets 
+of points with coordinates $(X, Y)$:
+
+\begin{itemize}
+    \item \textbf{First case:} The first set contains 200 points within a circle of radius 9 
+    and center $(1.5, 0)$, and the second set contains 200 points within a circle of radius 6 
+    and center $(1.5, 0)$.
+    \item \textbf{Second case:} The first set contains 100 random points with a mean of $(1, 0)$ 
+    and standard deviation of 1, and the second set contains 200 points within a circle of radius 
+    6 and center $(1.5, 0)$.
+\end{itemize}
+
+Plot the data for both cases. Use logistic regression with $L_2$ regularization to separate the two classes. 
+Since the data is not linearly separable, increase the feature dimensions as shown below:
+
+\[
+X = [x_1, x_2], \quad f(X) = [x_1, x_2, x_1^2, x_2^2, x_1x_2, \dots]
+\]
+
+Report the classification accuracy and decision boundary for both cases.
+
+\section*{Question 3}
+
+In this question, we will implement a non-parametric Parzen estimation method. First, without using pre-built machine 
+learning packages, implement the requested algorithm on the existing dataset. Implement the Parzen window estimation 
+for the \texttt{duration} column using a Gaussian kernel. Use a window size of 10. Compare the results using three 
+different window sizes: 20, 50, and 100.
+
+Plot the distribution as the value of $n$ increases and show the convergence process. Finally, compare your results with 
+the library functions for Parzen estimation.
+
+% \begin{theorem}
+% This is a theorem statement.
+% \label{thm:sample-statement}
+% \end{theorem}
+
+% \proof{
+% This is a proof.
+% }
+
+
+
+\end{document}

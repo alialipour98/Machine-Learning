@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{graphicx}
+
+\newcommand{\proof}[1]{
+{\noindent {\it Proof.} {#1} \rule{2mm}{2mm} \vskip \belowdisplayskip}
+}
+
+
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{claim}[lemma]{Claim}
+\newtheorem{definition}[lemma]{Definition}
+\newtheorem{corollary}[lemma]{Corollary}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\topmargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8.5in}
+
+\begin{document}
+
+\setlength{\fboxrule}{.5mm}\setlength{\fboxsep}{1.2mm}
+\newlength{\boxlength}\setlength{\boxlength}{\textwidth}
+\addtolength{\boxlength}{-4mm}
+\begin{center}\framebox{\parbox{\boxlength}{\bf
+Machine Learning \hfill 
+}}\end{center}
+\vspace{5mm}
+
+\section*{Question 1}
+The objective of this question is to familiarize you with the Naïve Bayes classifier and its implementation.
+\begin{itemize}
+    \item \textbf{Part A:} Explain the Naïve Bayes classifier and its structural differences compared to 
+                           the optimal Bayes classifier. Explain why it makes sense to use Naïve Bayes instead 
+                           of the optimal Bayes classifier, particularly in cases where assuming independence 
+                           between features might not be strictly true.
+    
+    \item \textbf{Part B:} Implement a Naïve Bayes classifier from scratch for a dataset with three classes. 
+                           You need to build the classifier for each class individually, and evaluate accuracy, 
+                           precision, recall, and generate a confusion matrix.
+
+    \item \textbf{Part C:} Implement the Naïve Bayes classifier using SKLearn and compare the results of part (b) 
+                           with the results obtained using SKLearn.
+\end{itemize}
+
+\section*{Question 2}
+Design a binary classifier to distinguish between sea and forest images using the 'image' 
+dataset. Report accuracy, precision, recall, and confusion matrix.
+
+\begin{itemize}
+    \item \textbf{Hint:} You don't need to use any famous feature extraction algorithms for classification. 
+                         You can use color features to separate the two classes (for instance, the sea images are 
+                         more likely to have blue tones, while the forest images are more likely to have green tones).
+    
+\end{itemize}
+
+% \begin{theorem}
+% This is a theorem statement.
+% \label{thm:sample-statement}
+% \end{theorem}
+
+% \proof{
+% This is a proof.
+% }
+
+
+
+\end{document}

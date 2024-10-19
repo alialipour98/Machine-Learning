@@ -1,0 +1,143 @@
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl}	 % A4 paper and 11pt font size
+
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm}	 % Custom font sizes - used for the initial letter in the document
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+% Headers - all currently empty
+\lhead{}
+\chead{}
+\rhead{}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+\renewcommand{\headrulewidth}{0.0pt} % No header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+\lettrine[lines=3,lhang=0.3,nindent=0em]{
+\color{DarkGoldenrod}
+{\textsf{#1}}}{}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{20}{20} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
+
+\title{Machine Learning (Problem set 1)} % Your article title
+
+\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+
+\preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
+
+\author{Ali Alipour, } % Your name
+
+\postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+University of Tehran % Your institution
+
+\par\end{flushleft}\HorRule} % Horizontal rule after the title
+
+\date{} % Add a date here if you would like one to appear underneath the title block
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+% The first character should be within \initial{}
+\initial{T}\textbf{his report addresses solutions to questions 1 and 2 from the Machine Learning homework. 
+                   In question 1, we implement a Naïve Bayes classifier, explain its theory, and compare manual 
+                   results with those from Scikit-learn, evaluating performance through accuracy, precision, 
+                   recall, and confusion matrices. In question 2, we design a binary classifier to distinguish 
+                   between sea and forest images based on color features, analyzing classification accuracy and misclassifications.}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section*{\small{Question 1}}
+
+\subsection*{\small{Explanation of Naïve Bayes Classifier}}
+The main difference between the Naïve Bayes classifier and the Optimal Bayes classifier is that Naïve Bayes assumes that the features in the dataset are independent from each other, which results in zero covariance. Due to the assumption of feature independence, the Naïve Bayes classifier simplifies the Bayes rule as follows:
+
+\[
+P(y|x_1, x_2, ..., x_n) = \frac{p(y) \prod_{i=1}^{n} p(x_i | y)}{p(x_1, x_2, ..., x_n)}
+\]
+
+Even though the independence assumption of features in Naïve Bayes is relatively simplistic, it often performs well in practice, even when the features are not truly independent. The formula for Optimal Bayes is as follows:
+
+\[
+P(y | x) = \frac{p(x | y) p(y)}{p(x)}
+\]
+
+If the data distribution is normal, the relevant normal distribution formula should be used in place of conditional probability, and the covariance matrix must be considered in cases where features are not independent.
+
+\subsection*{\small{Naïve Bayes Algorithm Implementation}}
+\begin{enumerate}
+    \item First, the specified dataset is loaded using the \texttt{pd.read\_csv()} function.
+    \item Data preprocessing is carried out to handle missing values (\texttt{NaN}) and remove rows with incomplete data.
+    \item To ease computations, two helper functions were defined. One for feature normalization and another to compute the prior probability. These functions are shown in Figures 3 and 4.
+    \item The dataset is split into training and testing sets with a ratio of 70\% training and 30\% testing data.
+    \item For each class, the mean and variance of features are computed using the \texttt{groupby} function.
+    \item Using the computed means and variances, the normal distribution for each feature is calculated, and the probability for each class is computed.
+    \item The results are combined, and for each test sample, the class with the highest probability is selected.
+    \item A confusion matrix is generated to compare predicted and actual values.
+\end{enumerate}
+
+\subsection*{\small{Naïve Bayes Implementation Using Scikit-learn}}
+Using the \texttt{GaussianNB} from the \texttt{Scikit-learn} library, the Naïve Bayes classifier is implemented, and its accuracy is compared with the manually implemented version. The results indicate that both methods yield the same accuracy.
+
+\section*{\small{Question 2}}
+In this problem, a binary classifier is designed to distinguish between sea and forest images using color features (blue for the sea and green for the forest). The dataset is loaded, and the RGB values are extracted for each image.
+
+\begin{enumerate}
+    \item The path to the images is defined, and the list of images is obtained using \texttt{list\_dir}.
+    \item For each image, the mean color values are calculated, and predictions are made based on the dominant color (blue for the sea, green for the forest). The confusion matrix is then calculated.
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+  \bibitem[Alipour Fraydani, 2024]{AlipourFraydani:2024}
+  Alipour Fraydani, A. (2024).
+  \newblock Homework on Machine Learning problem set 1, University of Tehran.
+  \newblock {\em Unpublished Manuscript}, Department of Electrical Engineering, University of Tehran.
+  
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

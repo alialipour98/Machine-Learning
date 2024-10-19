@@ -1,0 +1,226 @@
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl}	 % A4 paper and 11pt font size
+
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm}	 % Custom font sizes - used for the initial letter in the document
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+% Headers - all currently empty
+\lhead{}
+\chead{}
+\rhead{}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+\renewcommand{\headrulewidth}{0.0pt} % No header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+\lettrine[lines=3,lhang=0.3,nindent=0em]{
+\color{DarkGoldenrod}
+{\textsf{#1}}}{}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{20}{20} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
+
+\title{Machine Learning (Problem set 3)} % Your article title
+
+\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+
+\preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
+
+\author{Ali Alipour, } % Your name
+
+\postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+University of Tehran % Your institution
+
+\par\end{flushleft}\HorRule} % Horizontal rule after the title
+
+\date{} % Add a date here if you would like one to appear underneath the title block
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+% The first character should be within \initial{}
+\initial{T}\textbf{his report covers a series of machine learning tasks, focusing on the classification of signals and 
+                   datasets, model evaluation, and the application of various algorithms such as support vector machines 
+                   (SVM) and decision trees. The exercises explore essential concepts in machine learning, such as handling 
+                   imbalanced datasets, normalizing data, and reducing overfitting using regularization techniques.
+                   In the first section, we analyze electrocardiogram (ECG) signal classification, extracting features and 
+                   addressing the challenge of imbalanced classes. We implement different machine learning models, evaluate 
+                   their performance using confusion matrices, and refine the models using data normalization techniques.
+                   The second part of the report delves into the use of SVM with various kernels, including linear, radial b
+                   asis function (RBF), and polynomial kernels. These models are compared based on their ability to classify 
+                   non-linear datasets and the effectiveness of regularization methods in improving model performance.
+                   Finally, we explore decision trees, with a focus on the pre-pruning technique to prevent overfitting. 
+                   The tree models are evaluated in terms of accuracy, complexity, and their ability to generalize well on 
+                   unseen data. Through these exercises, we aim to understand the trade-offs between model complexity and 
+                   performance and how to fine-tune machine learning algorithms for better results.}
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section*{\small{Question 1}}
+
+In this question, we aim to classify ECG signals. Initially, we perform feature extraction 
+on the ECG signals, obtaining 169 different features.
+
+  \subsection*{\small{Part A}}
+
+    We need to add the required libraries to proceed with the exercise. After extracting the 
+    data from the Excel format, we convert it to a DataFrame and separate the labels from the 
+    data. Using the provided code, we then determine the number of each label in the dataset.
+
+  \subsection*{\small{Part B}}
+
+    The dataset is highly imbalanced, as observed from the distribution of the data. This imbalance 
+    is a common issue in machine learning where certain classes have significantly fewer samples 
+    than others. This can lead to biased models that perform poorly on the minority classes, as the 
+    model is optimized to minimize overall error, which is heavily influenced by the majority class.
+
+  \subsection*{\small{Part C}}
+
+    Next, we split the data into training and test sets and fit the model. The errors on the training 
+    and test sets are computed. The confusion matrix shows that the network has reduced the error on 
+    the majority class but still struggles with the minority class.
+
+  \subsection*{\small{Part D}}
+
+    After normalizing the data using standard normalization, we re-train the network. The performance 
+    of the model is assessed using precision, recall, and F1-score for each class.
+
+\section*{\small{Question 2}}
+
+    In this exercise, we generate the required data and display it. We then design a neural network to 
+    classify the generated data.
+    
+  \subsection*{\small{Part A}}
+    
+    Using the provided code, we generate the data and plot the points. We observe that the created data 
+    is imbalanced.
+    
+  \subsection*{\small{Part B}}
+    
+    We define a Madaline network as required and report the accuracy of the model.
+    
+  \subsection*{\small{Part C}}
+    
+    We repeat the process with a different set of neurons and observe the accuracy of the model.
+    
+  \subsection*{\small{Part D}}
+    
+    As we increase the number of neurons, the model's ability to separate the data improves, although this 
+    also increases the complexity and training time. It is crucial to strike a balance between model complexity 
+    and performance.
+
+\section*{\small{Question 3}}
+
+    In this question, we download the CIFAR-10 dataset and display six random images from the dataset.
+    
+  \subsection*{Part A}
+    
+    We load the dataset, normalize the data, and convert it to decimal form for training and testing.
+    
+  \subsection*{Part B}
+    
+    After adding the required libraries, we split the dataset into training and testing sets. The process shows that the dataset is prepared for model training.
+    
+  \subsection*{Part C}
+    
+    We design the required model and train it using different solvers (SGD, RMSProp, Adam) and compare their performances.
+    
+  \subsection*{Part D}
+    
+    We observe that Adam performs better and converges faster, though more epochs might be needed to achieve a better solution.
+
+\section*{\small{Question 4}}
+
+    In this question, we load the required libraries and dataset, build a decision tree model, 
+    and report the accuracy on both training and test sets.
+    
+  \subsection*{\small{Part A}}
+    
+    Using the provided code, we load the dataset and separate the training and testing sets.
+    
+  \subsection*{\small{Part B}}
+    
+    We build the decision tree model, observe the training process, and report the accuracy.
+    
+  \subsection*{\small{Part C}}
+    
+    We discuss the pre-pruning technique used to stop the decision tree from overfitting by 
+    setting stopping criteria based on tree size, the number of nodes, or impurity reduction.
+    
+  \subsection*{\small{Part D}}
+    
+    A model with depth 2 is designed, and we compare its accuracy with a fully trained tree. 
+    The shallower tree has lower accuracy on the training data but performs better on the test 
+    data, indicating it generalizes better.
+
+\begin{enumerate}
+    \item First, we define the necessary functions and libraries. We generate random data points within a specified radius and display the corresponding images.
+    \item Next, we repeat the process for a second scenario, generating and displaying the random data points again.
+    \item Using the generated data, we organize them into a DataFrame and assign labels to them.
+    \item We then write a manual code to split the data into training and testing sets.
+    \item Using the Logistic Regression class, we manually implement a logistic regression algorithm to classify the data.
+    \item Afterward, we increase the features using a mapping function to enhance the classification process.
+    \item Finally, we implement a classification algorithm using radial data generated from uniform and normal distributions and report the results.
+\end{enumerate}
+
+
+\begin{enumerate}
+    \item First, we load the dataset. We define both the Gaussian kernel and the estimated kernel function.
+    \item We extract the "duration" column from the dataset and represent it as a list. We proceed to plot the results of the kernel density estimations for different values of "duration."
+    \item We use the \texttt{kernelDensity} function to compute the kernel density and plot the results.
+    \item Lastly, we perform Parzen window estimation for a subset of 250 data points and visualize the results.
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+  \bibitem[Alipour Fraydani, 2024]{AlipourFraydani:2024}
+  Alipour Fraydani, A. (2024).
+  \newblock Homework on Machine Learning problem set 3, University of Tehran.
+  \newblock {\em Unpublished Manuscript}, Department of Electrical Engineering, University of Tehran.
+  
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

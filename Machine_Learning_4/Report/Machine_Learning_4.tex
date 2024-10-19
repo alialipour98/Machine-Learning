@@ -1,0 +1,151 @@
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl}	 % A4 paper and 11pt font size
+
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm}	 % Custom font sizes - used for the initial letter in the document
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+% Headers - all currently empty
+\lhead{}
+\chead{}
+\rhead{}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+\renewcommand{\headrulewidth}{0.0pt} % No header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+\lettrine[lines=3,lhang=0.3,nindent=0em]{
+\color{DarkGoldenrod}
+{\textsf{#1}}}{}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{20}{20} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
+
+\title{Machine Learning (Problem set 4)} % Your article title
+
+\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+
+\preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
+
+\author{Ali Alipour, } % Your name
+
+\postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+University of Tehran % Your institution
+
+\par\end{flushleft}\HorRule} % Horizontal rule after the title
+
+\date{} % Add a date here if you would like one to appear underneath the title block
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+% The first character should be within \initial{}
+\initial{T}\textbf{his report presents a series of machine learning experiments focusing on the classification of datasets 
+                   using different algorithms and techniques. The tasks involve splitting data into training and testing sets, 
+                   applying models such as linear regression and support vector machines (SVM), and evaluating their performance 
+                   through accuracy metrics and confusion matrices. The report first explores the use of a linear model to classify 
+                   features, followed by an analysis of the impact of feature selection on model accuracy. Next, we delve into the 
+                   application of SVM with different kernel functions, including the Radial Basis Function (RBF), linear, and polynomial 
+                   kernels. Each kernel is evaluated based on its ability to separate non-linear data, and regularization techniques are 
+                   employed to control overfitting and improve model generalization. Lastly, various multi-class classification strategies, 
+                   such as one-vs-one and one-vs-rest, are compared for different kernel methods. The performance of these strategies is 
+                   assessed using confusion matrices and accuracy scores, providing insights into their effectiveness in handling complex 
+                   datasets. Throughout the report, the experiments highlight the trade-offs between model complexity, accuracy, and 
+                   computational efficiency.}
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section*{\small{Question 1}}
+
+1) We begin by loading the dataset and splitting it into training and test sets. 
+   The linear model is applied, and accuracy metrics for the test and training 
+   sets are reported.
+
+2) The confusion matrix is also calculated, showing the accuracy of the model on 
+   the selected features. The results indicate that the selected features allow 
+   for good separation between the classes.
+
+3) We proceed by analyzing the features `Petal Length` and `Petal Width`. Although 
+   the accuracy drops slightly, we still achieve high accuracy for the class `Setosa`, 
+   which has a large distance from other classes.
+
+
+\section*{\small{Question 2}}
+
+We compare the performance of various models (Linear, RBF, Polynomial) using one-vs-one and one-vs-rest strategies. 
+Confusion matrices and accuracy scores are reported for each, with the polynomial kernel showing better performance 
+in multi-class classification.
+
+\begin{enumerate}
+    \item First, we define the necessary functions and libraries. We generate random data points within a specified 
+    radius and display the corresponding images.
+    \item Next, we repeat the process for a second scenario, generating and displaying the random data points again.
+    \item Using the generated data, we organize them into a DataFrame and assign labels to them.
+    \item We then write a manual code to split the data into training and testing sets.
+    \item Using the Logistic Regression class, we manually implement a logistic regression algorithm to classify the data.
+    \item Afterward, we increase the features using a mapping function to enhance the classification process.
+    \item Finally, we implement a classification algorithm using radial data generated from uniform and normal distributions 
+    and report the results.
+\end{enumerate}
+
+
+\begin{enumerate}
+    \item First, we load the dataset. We define both the Gaussian kernel and the estimated kernel function.
+    \item We extract the "duration" column from the dataset and represent it as a list. We proceed to plot 
+    the results of the kernel density estimations for different values of "duration."
+    \item We use the \texttt{kernelDensity} function to compute the kernel density and plot the results.
+    \item Lastly, we perform Parzen window estimation for a subset of 250 data points and visualize the results.
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+  \bibitem[Alipour Fraydani, 2024]{AlipourFraydani:2024}
+  Alipour Fraydani, A. (2024).
+  \newblock Homework on Machine Learning problem set 4, University of Tehran.
+  \newblock {\em Unpublished Manuscript}, Department of Electrical Engineering, University of Tehran.
+  
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

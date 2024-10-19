@@ -1,0 +1,138 @@
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{scrartcl}	 % A4 paper and 11pt font size
+
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm}	 % Custom font sizes - used for the initial letter in the document
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+% Headers - all currently empty
+\lhead{}
+\chead{}
+\rhead{}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+\renewcommand{\headrulewidth}{0.0pt} % No header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+\lettrine[lines=3,lhang=0.3,nindent=0em]{
+\color{DarkGoldenrod}
+{\textsf{#1}}}{}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{DarkGoldenrod} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+
+\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule \fontsize{20}{20} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont} % Horizontal rule before the title
+
+\title{Machine Learning (Problem set 5)} % Your article title
+
+\posttitle{\par\end{flushleft}\vskip 0.5em} % Whitespace under the title
+
+\preauthor{\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}} % Author font configuration
+
+\author{Ali Alipour, } % Your name
+
+\postauthor{\footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+University of Tehran % Your institution
+
+\par\end{flushleft}\HorRule} % Horizontal rule after the title
+
+\date{} % Add a date here if you would like one to appear underneath the title block
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+% The first character should be within \initial{}
+\initial{T}\textbf{his report discusses methods for selecting optimal features and performing dimensionality 
+                   reduction using Principal Component Analysis (PCA) and Linear Discriminant Analysis (LDA). 
+                   The report also includes model performance evaluation through cross-validation with different n
+                   umbers of components.}
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{\small{Feature Selection and Dimensionality Reduction}}
+
+   \subsection{Principal Component Analysis (PCA)}
+      PCA helps identify the optimal number of components by balancing the retention of meaningful information and 
+      reducing dimensionality. The method finds an "elbow point" where the eigenvalues decrease significantly, 
+      indicating that most of the variance is captured by the components before this point.
+
+   \subsection{\small{Cumulative Variance}}
+      The cumulative variance plot helps visualize how much total variance is explained as more components are added. 
+      This ensures that we keep enough components to capture the majority of the data's variance.
+
+   \subsection{\small{Model Evaluation Using Cross-Validation}}
+      Cross-validation is used to evaluate the performance of the model with different numbers of components. 
+      It helps determine the number of components that yield the best accuracy.
+
+\section{\small{Linear Discriminant Analysis (LDA)}}
+   LDA focuses on maximizing class separability by applying a linear transformation. It selects the components 
+   that contribute the most to between-class variance while minimizing within-class variance.
+
+   \subsection{\small{Feature Selection in LDA}}
+      LDA automatically selects the most important features that maximize class separability. 
+      This selection process enhances classification accuracy and reduces the time required for convergence.
+
+\section{\small{Evaluation of Gaussian Mixture Models (GMM)}}
+   Gaussian Mixture Models (GMM) are used to classify the dataset. Cross-validation helps determine the 
+   optimal number of components for the GMM, ensuring that the model minimizes classification errors.
+
+\section{\small{Question 1}}
+   The evaluation of different techniques for dimensionality reduction is crucial in ensuring that meaningful 
+   information is preserved while minimizing unnecessary data. Methods like PCA and LDA offer distinct advantages 
+   depending on the dataset and the goals of the analysis.
+
+\section{\small{Question 2}}
+   Cross-validation serves as a powerful tool for evaluating model performance across different configurations, 
+   including the number of components or features selected. By comparing results obtained from various settings, 
+   we can choose the configuration that offers the best trade-off between complexity and accuracy.
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+  \bibitem[Alipour Fraydani, 2024]{AlipourFraydani:2024}
+  Alipour Fraydani, A. (2024).
+  \newblock Homework on Machine Learning problem set 5, University of Tehran.
+  \newblock {\em Unpublished Manuscript}, Department of Electrical Engineering, University of Tehran.
+  
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
