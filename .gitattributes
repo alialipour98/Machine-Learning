@@ -1,1 +1,2 @@
 *.csv filter=lfs diff=lfs merge=lfs -text
+Machine_Learning_5/Q5/trainData.csv filter=lfs diff=lfs merge=lfs -text
